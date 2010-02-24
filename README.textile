@@ -1,0 +1,15 @@
+h1. Django-medialib Documentation
+
+Django-medialib is a simple application to easilly integrate media into the django-admin, for use with FCKEditor.
+
+h2. Requirements
+
+Django-medialib has three main requirements
+
+- django-photologue
+- JQuery
+- FCKEditor
+
+h3. Usage
+
+... tbc ...

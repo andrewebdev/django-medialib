@@ -1,0 +1,44 @@
+{% comment %}
+
+This template will render the html page that is included in the admin media browser.
+If you choose to change some of the id's and structure, then you will need to update,
+admin_media_browser_head.html to reflect the changes.
+
+{% endcomment %}
+
+<div id="medialib_browser">
+{% if pictures %}
+
+    <div class="medialib_pagination">
+        {% if pictures.has_previous %}
+        <a class="medialib_paginator"
+            href="{% url medialib_media_browser %}?count={{ count }};page=1">First Page</a>&nbsp;
+        <a class="medialib_paginator"
+            href="{% url medialib_media_browser %}?count={{ count }};page={{ pictures.previous_page_number }}">&lt;&lt;</a>&nbsp;
+        {% endif %}
+
+        <span>Page <strong>{{ pictures.number }}</strong></span>
+
+        {% if pictures.has_next %}
+        &nbsp;<a class="medialib_paginator"
+            href="{% url medialib_media_browser %}?count={{ count }};page={{ pictures.next_page_number }}">&gt;&gt;</a>&nbsp;
+        <a class="medialib_paginator"
+            href="{% url medialib_media_browser %}?count={{ count }};page={{ pictures.paginator.num_pages }}">Last Page</a>
+        {% endif %}
+    </div>
+
+
+    <div class="medialib_browser_thumbs">
+    {% for picture in pictures.object_list %}
+        <div class="medialib_picture_frame">
+            <strong>{{ picture.title }}</strong>
+            <img src="{{ picture.get_admin_thumbnail_url }}" /><br />
+            {{ picture.small_picture|safe }}<br />
+            {{ picture.medium_picture|safe }}<br />
+            {{ picture.large_picture|safe }}
+        </div>
+    {% endfor %}
+    </div>
+
+{% endif %}
+</div>

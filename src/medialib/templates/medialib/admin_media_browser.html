@@ -1,0 +1,16 @@
+{% load adminmedia %}
+<div id="media_browser_tabs">
+    <span>
+        <a id="add_id_picture"
+            class="add-another"
+            target="_blank"
+            href="/admin/medialib/picture/add/">
+            <img width="10" height="10" alt="Add Another" src="{% admin_media_prefix %}img/admin/icon_addlink.gif" />
+            Add Picture
+        </a> |
+        <a id="media_browser_refresh" href="#">Refresh Media</a> |
+        <a id="media_browser_toggle" href="#">Show/Hide Media</a>
+    <span>
+</div>
+<div id="media_browser">
+</div>
