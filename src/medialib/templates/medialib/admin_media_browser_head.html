@@ -1,7 +1,7 @@
 <script type="text/javascript" charset="utf-8">
     function showAjaxLoader(targetElement) {
         // Change the src location of the ajax-loader.gif if you have it on another location
-        $(targetElement).empty().html('<center><img class="ajax-loader" src="/media/static/images/ajax-loader.gif" /></center>');
+        $(targetElement).empty().html('<center><img class="ajax-loader" src="{{ MEDIA_URL }}ajax-loader.gif" /></center>');
     };
 
     // This script will manage the AJAX requests for the media_browser

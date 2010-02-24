@@ -1,0 +1,23 @@
+<script src="{{ MEDIA_URL }}ckeditor/ckeditor.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	window.onload = function()
+	{
+            CKEDITOR.replace( 'id_content', {
+                toolbar : [
+                    ['Source','-','Save'],
+                    ['Maximize', 'ShowBlocks'],
+                    '/',
+                    ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker'],
+                    ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+                    '/',
+                    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+                    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+                    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                    '/',
+                    ['Styles', 'Format', 'FontSize'],
+                    ['Link','Unlink','Anchor'],
+                    ['Image','Table','HorizontalRule','SpecialChar'],
+                ],
+            });
+	};
+</script>
