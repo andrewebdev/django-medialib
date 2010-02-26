@@ -1,0 +1,116 @@
+<script src="{{ CKEDITOR_SCRIPT_LOCATION }}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	window.onload = function()
+	{
+            CKEDITOR.replace( '{{ field_id }}', {
+                toolbar : [
+                    ['Source','-','Save'],
+                    ['Maximize', 'ShowBlocks'],
+                    '/',
+                    ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker'],
+                    ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+                    '/',
+                    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+                    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+                    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                    '/',
+                    ['Styles', 'Format', 'FontSize'],
+                    ['Link','Unlink','Anchor'],
+                    ['Image','Table','HorizontalRule','SpecialChar'],
+                ],
+            });
+	};
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    function showAjaxLoader(targetElement) {
+        // Change the src location of the ajax-loader.gif if you have it on another location
+        $(targetElement).empty().html('<center><img class="ajax-loader" src="{{ AJAX_LOADER_LOCATION }}" /></center>');
+    };
+
+    // This script will manage the AJAX requests for the media_browser
+    function connectBrowserEvents(){
+        // Add that image to the content when size is clicked
+        $('.medialib_picture').live('click', function() {
+            // FCKEditor - Add picture to the editor content
+            var oEditor = CKEDITOR.instances.{{ field_id }};
+            var new_image = '<img src="' + $(this).attr('href') + '" />';
+            oEditor.setData(oEditor.getData() + new_image);
+            return false;
+        });
+        $('.medialib_picture_frame img').live('click', function() {
+            // FCKEditor - Add picture to the editor content
+            var oEditor = CKEDITOR.instances.{{ field_id }};
+            var new_image = '<img src="' + $(this).attr('src') + '" />';
+            oEditor.setData(oEditor.getData() + new_image);
+            return false;
+        });
+
+        // Hook up the AJAX for the pagination
+        $('a.medialib_paginator').live('click', function() {
+            var medialib_url = $(this).attr('href');
+            showAjaxLoader('#media_browser');
+            $('#media_browser').load(medialib_url);
+            return false;
+        });
+    };
+
+    $(document).ready(function() {
+        // Set the initial value for medialib_url
+        var medialib_url = "{% url medialib_media_browser %}"
+        showAjaxLoader('#media_browser');
+
+        // Load the media browser, and set up the callback function
+        $('#media_browser').load(medialib_url, function() {
+            connectBrowserEvents();
+        });
+
+        // Media Browser Links and Tabs
+        $('#media_browser_refresh').click(function() {
+            showAjaxLoader('#media_browser');
+            $('#media_browser').load(medialib_url, function() {
+                connectBrowserEvents();
+            });
+            return false;
+        });
+
+        $('#media_browser_toggle').click(function () {
+            $('#media_browser').toggle("medium");
+            return false;
+        });
+    });
+</script>
+
+<style type="text/css" media="screen">
+    /* Some Custom styling for the media browser,
+     * so that it looks nice in the django admin
+     */
+    .medialib_pagination {
+        width: 100%;
+        clear: both;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    #media_browser {
+        border: 3px solid #e3e3e3;
+        padding: 1em;
+        width: auto;
+        min-height: 185px;
+        overflow: hidden;
+        display: none; /* Hide the browser when the page is first loaded */
+    }
+
+    .medialib_picture_frame {
+        text-align: center;
+        position: relative;
+        float: left;
+        margin: 0.5em;
+        padding: 3px;
+        background: #e3e3e3;
+        width: 110px;
+        height: auto;
+    }
+
+    img.ajax-loader { margin-top: 50px; }
+</style>
