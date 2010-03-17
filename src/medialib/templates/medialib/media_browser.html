@@ -32,7 +32,7 @@ admin_media_browser_head.html to reflect the changes.
     {% for picture in pictures.object_list %}
         <div class="medialib_picture_frame">
             <div class="medialib_picture">
-                <strong>{{ picture.title }}</strong>
+                <div class="title">{{ picture.title }}</div>
                 <img src="{{ picture.get_admin_thumbnail_url }}" /><br />
                 {{ picture.small_picture|safe }}<br />
                 {{ picture.medium_picture|safe }}<br />
