@@ -2,7 +2,8 @@
 <script type="text/javascript">
 	window.onload = function()
 	{
-            CKEDITOR.replace( '{{ field_id }}', {
+            {% for field in field_ids %}
+            CKEDITOR.replace( '{{ field }}', {
                 toolbar : [
                     ['Source','-','Save'],
                     ['Maximize', 'ShowBlocks'],
@@ -19,6 +20,7 @@
                     ['Image','Table','HorizontalRule','SpecialChar'],
                 ],
             });
+            {% endfor %}
 	};
 </script>
 
@@ -31,20 +33,22 @@
     // This script will manage the AJAX requests for the media_browser
     function connectBrowserEvents(){
         // Add that image to the content when size is clicked
+        {% for field in field_ids %}
         $('.medialib_picture').live('click', function() {
             // FCKEditor - Add picture to the editor content
-            var oEditor = CKEDITOR.instances.{{ field_id }};
+            var oEditor = CKEDITOR.instances.{{ field }};
             var new_image = '<img src="' + $(this).attr('href') + '" />';
             oEditor.setData(oEditor.getData() + new_image);
             return false;
         });
         $('.medialib_picture_frame img').live('click', function() {
             // FCKEditor - Add picture to the editor content
-            var oEditor = CKEDITOR.instances.{{ field_id }};
+            var oEditor = CKEDITOR.instances.{{ field }};
             var new_image = '<img src="' + $(this).attr('src') + '" />';
             oEditor.setData(oEditor.getData() + new_image);
             return false;
         });
+        {% endfor %}
 
         // Hook up the AJAX for the pagination
         $('a.medialib_paginator').live('click', function() {
