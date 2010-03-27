@@ -34,15 +34,17 @@
     function connectBrowserEvents(){
         // Add that image to the content when size is clicked
         {% for field in field_ids %}
-        $('.medialib_picture').live('click', function() {
+        $('.medialib_picture').live('click', function(event_obj) {
             // FCKEditor - Add picture to the editor content
+            if (event_obj.button != 0) { return false; }
             var oEditor = CKEDITOR.instances.{{ field }};
             var new_image = '<img src="' + $(this).attr('href') + '" />';
             oEditor.setData(oEditor.getData() + new_image);
             return false;
         });
-        $('.medialib_picture_frame img').live('click', function() {
+        $('.medialib_picture_frame img').live('click', function(event_obj) {
             // FCKEditor - Add picture to the editor content
+            if (event_obj.button != 0) { return false; }
             var oEditor = CKEDITOR.instances.{{ field }};
             var new_image = '<img src="' + $(this).attr('src') + '" />';
             oEditor.setData(oEditor.getData() + new_image);
