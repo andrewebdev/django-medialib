@@ -35,6 +35,13 @@ class Picture(ImageModel):
     def __unicode__(self):
         return "%s" % self.title
 
+    def original_picture(self):
+        return '<a class="medialib_picture" id="picture_%s_small" href="%s">Original</a>' % (
+            self.id,
+            self.image.url,
+        )
+    original_picture.allow_tags = True
+
     def small_picture(self):
         return '<a class="medialib_picture" id="picture_%s_small" href="%s">Small</a>' % (
             self.id,

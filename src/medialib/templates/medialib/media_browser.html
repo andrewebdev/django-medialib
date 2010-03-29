@@ -34,6 +34,7 @@ admin_media_browser_head.html to reflect the changes.
             <div class="medialib_picture">
                 <div class="title">{{ picture.title }}</div>
                 <img src="{{ picture.get_admin_thumbnail_url }}" /><br />
+                {{ picture.original_picture|safe }}<br />
                 {{ picture.small_picture|safe }}<br />
                 {{ picture.medium_picture|safe }}<br />
                 {{ picture.large_picture|safe }}
