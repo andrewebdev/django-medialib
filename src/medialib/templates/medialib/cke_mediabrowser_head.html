@@ -1,5 +1,6 @@
 <script src="{{ CKEDITOR_SCRIPT_LOCATION }}" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
+<script type="text/javascript">//<!--
+
 	window.onload = function()
 	{
             {% for field in field_ids %}
@@ -22,9 +23,12 @@
             });
             {% endfor %}
 	};
+
+//-->
 </script>
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">//<!--
+
     function showAjaxLoader(targetElement) {
         // Change the src location of the ajax-loader.gif if you have it on another location
         $(targetElement).empty().html('<center><img class="ajax-loader" src="{{ AJAX_LOADER_LOCATION }}" /></center>');
@@ -85,6 +89,8 @@
             return false;
         });
     });
+
+//-->
 </script>
 
 <style type="text/css" media="screen">
